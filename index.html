@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hello App | CI/CD Jenkins</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+  }
+  .card {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 48px 56px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    max-width: 520px;
+  }
+  .emoji { font-size: 64px; margin-bottom: 16px; }
+  h1 { font-size: 2.2rem; margin-bottom: 12px; }
+  p { font-size: 1.05rem; line-height: 1.6; opacity: 0.9; margin-bottom: 24px; }
+  .badges { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  .badge {
+    background: rgba(255,255,255,0.2);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  footer { margin-top: 28px; font-size: 0.8rem; opacity: 0.7; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="emoji">🚀</div>
+    <h1>Hello World!</h1>
+    <p>Aplikasi ini di-build &amp; di-deploy secara <b>otomatis</b> oleh pipeline CI/CD Jenkins di Google Cloud Platform.</p>
+    <div class="badges">
+      <span class="badge">🐳 Docker</span>
+      <span class="badge">🤖 Jenkins</span>
+      <span class="badge">☁️ GCP</span>
+      <span class="badge">🐙 GitHub</span>
+    </div>
+    <footer>Mirza Pryranda — Bootcamp DevOps 2026</footer>
+  </div>
+</body>
+</html>
