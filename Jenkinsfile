@@ -45,20 +45,12 @@ pipeline {
     post {
         success {
             withCredentials([string(credentialsId: 'discord-webhook', variable: 'DISCORD_URL')]) {
-                sh '''
-                curl -s -H "Content-Type: application/json" -X POST \
-                  -d "{\"content\": \"✅ Build SUCCESS: $JOB_NAME (#$BUILD_NUMBER) - deploy berhasil!\"}" \
-                  "$DISCORD_URL"
-                '''
+                sh '''PAYLOAD=$(printf '{"content": "✅ Build SUCCESS: %s (#%s) - deploy berhasil!"}' "$JOB_NAME" "$BUILD_NUMBER") && curl -s -X POST -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_URL"'''
             }
         }
         failure {
             withCredentials([string(credentialsId: 'discord-webhook', variable: 'DISCORD_URL')]) {
-                sh '''
-                curl -s -H "Content-Type: application/json" -X POST \
-                  -d "{\"content\": \"❌ Build FAILED: $JOB_NAME (#$BUILD_NUMBER) - cek Jenkins!\"}" \
-                  "$DISCORD_URL"
-                '''
+                sh '''PAYLOAD=$(printf '{"content": "❌ Build FAILED: %s (#%s) - cek Jenkins!"}' "$JOB_NAME" "$BUILD_NUMBER") && curl -s -X POST -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_URL"'''
             }
         }
     }
