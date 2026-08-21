@@ -29,6 +29,15 @@ pipeline {
             }
         }
 
+        stage('ACC Atasan') {
+            steps {
+                withCredentials([string(credentialsId: 'discord-webhook', variable: 'DISCORD_URL')]) {
+                    sh '''PAYLOAD=$(printf '{"content": "⏳ %s (#%s) menunggu ACC atasan untuk deploy!"}' "$JOB_NAME" "$BUILD_NUMBER") && curl -s -X POST -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_URL"'''
+                }
+                input message: 'Deploy ke production?', ok: 'ACC 🚀', submitter: 'MirzaPryranda'
+            }
+        }
+
         stage('Deploy ke Server2') {
             steps {
                 sh '''
