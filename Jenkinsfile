@@ -44,10 +44,22 @@ pipeline {
 
     post {
         success {
-            echo '✅ BUILD & DEPLOY BERHASIL!'
+            withCredentials([string(credentialsId: 'discord-webhook', variable: 'DISCORD_URL')]) {
+                sh '''
+                curl -s -H "Content-Type: application/json" -X POST \
+                  -d "{\"content\": \"✅ Build SUCCESS: $JOB_NAME (#$BUILD_NUMBER) - deploy berhasil!\"}" \
+                  "$DISCORD_URL"
+                '''
+            }
         }
         failure {
-            echo '❌ BUILD GAGAL! Cek Console Output!'
+            withCredentials([string(credentialsId: 'discord-webhook', variable: 'DISCORD_URL')]) {
+                sh '''
+                curl -s -H "Content-Type: application/json" -X POST \
+                  -d "{\"content\": \"❌ Build FAILED: $JOB_NAME (#$BUILD_NUMBER) - cek Jenkins!\"}" \
+                  "$DISCORD_URL"
+                '''
+            }
         }
     }
 }
